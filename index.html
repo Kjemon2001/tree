@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <title>UX christmas tree</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -162,6 +165,10 @@
             position: absolute;
             z-index: 3;
         }
+        
+        .wishes--wrapper {
+            position: relative;
+        }
 
         @keyframes fall {
             0% {
@@ -200,7 +207,63 @@
             }
         }
 
+        #gift2 {
+            animation: bounce 1.5s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+
+        .fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
+            background: #1d1d1d;
+            opacity: .6;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: calc(95vw - 48px);
+            background: #ffffff;
+            z-index: 101;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            padding: 24px;
+        }
+
+        .close--popup {
+            position: absolute;
+            top: -35px;
+            right: -15px;
+            padding: 10px;
+        }
+        
     </style>
+
     <div class="treeWrapper">
 
         <div id="snow-container" title="Click anywhere to remove snow">
@@ -249,6 +312,15 @@
         </div>
     </div>
 
+    <div class="fade" style="display: none;"></div>
+    <div class="popup" style="display: none;">
+        <div class="wishes--wrapper">
+            <div class="close--popup" style="font-family: roboto;">X</div>
+            <p style="text-align: center; font-family: roboto;">May your holiday season be as profitable as a Black Friday sale and as stress-free as a weekend off.</p>
+            <p style="text-align: center; font-family: roboto;">~ UX Team</p>
+        </div>
+    </div>
+
     <script>
         const snowContainer = document.getElementById("snow-container");
         const snowContent = ['&#10052', '&#10053', '&#10054']
@@ -283,6 +355,21 @@
         window.addEventListener("load", () => {
             createSnow(30)
         });
+
+        document.querySelector("#gift2").addEventListener("click", function() {
+            document.querySelector(".fade").style.display = "block"
+            document.querySelector(".popup").style.display = "block"
+        })
+
+        document.querySelector(".fade").addEventListener("click", function() {
+            document.querySelector(".fade").style.display = "none"
+            document.querySelector(".popup").style.display = "none"
+        })
+        
+        document.querySelector(".close--popup").addEventListener("click", function() {
+            document.querySelector(".fade").style.display = "none"
+            document.querySelector(".popup").style.display = "none"
+        })
 
     </script>
 
